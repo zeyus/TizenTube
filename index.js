@@ -13,12 +13,8 @@ const tvSdb = new Socket();
 let reconnectionInterval = null;
 
 tvSdb.on('error', (err) => {
-    console.log("Socket error, trying to reconnect");
-    console.log("err");
-    // Reconnect to the TV if something happens (like turning it off).
-    reconnectionInterval = setInterval(async () => {
-        tvSdb.connect(26101, Config.tvIP);
-    }, 5000);
+    console.log("Socket error, will try to reconnect");
+    console.log(err);
 });
 
 const sendData = (hexData) => tvSdb.write(Buffer.from(hexData, 'hex'))
@@ -61,9 +57,11 @@ tvSdb.on('connect', () => {
 
 tvSdb.on('close', () => {
     // Reconnect to the TV if something happens (like turning it off).
-    reconnectionInterval = setInterval(async () => {
-        tvSdb.connect(26101, Config.tvIP);
-    }, 5000);
+    if (reconnectionInterval == null) {
+        reconnectionInterval = setInterval(async () => {
+            tvSdb.connect(26101, Config.tvIP);
+        }, 10000);
+    }
 });
 
 wss.on('connection', ws => {
