@@ -1,6 +1,6 @@
 {
     "appId": "Ad6NutHP8l.TizenTube",
-    "tvIP": "192.168.1.2",
+    "tvIP": "192.168.2.206",
     "debug": false,
-    "isTizen3": false
+    "isTizen3": true
 }

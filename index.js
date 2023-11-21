@@ -80,6 +80,8 @@ wss.on('connection', ws => {
                 // The second check is for the size of the message. This took me a little too long to find out.
                 // The third check is for removing the third argument that debug was expecting on Tizen 3.0 devices. After removing it, it works on newer Tizen TVs.
                 sendData(`4f50454e2500000000000000${Config.isTizen3 ? '25' : '23' }000000${Config.isTizen3 ? '2f0c' : 'df0b' }0000b0afbab17368656c6c3a3020646562756720${appId}${Config.isTizen3 ? '2030' : ''}00`)
+                console.log("msg recieved");
+		sendData(`4f50454e2500000000000000${Config.isTizen3 ? '25' : '23' }000000${Config.isTizen3 ? '2f0c' : 'df0b' }0000b0afbab17368656c6c3a3020646562756720${appId}${Config.isTizen3 ? '2030' : ''}00`)
                 break;
             }
 
