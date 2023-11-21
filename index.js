@@ -4,8 +4,22 @@ import startDebugging from './debuggerController.js';
 import Config from './config.json' assert { type: 'json' };
 
 const wss = new WebSocketServer({ port: 3000 });
+wss.on('error', (err) => {
+    console.log("Websocket error...ignoring");
+    console.log(err);
+});
+
 const tvSdb = new Socket();
 let reconnectionInterval = null;
+
+tvSdb.on('error', (err) => {
+    console.log("Socket error, trying to reconnect");
+    console.log("err");
+    // Reconnect to the TV if something happens (like turning it off).
+    reconnectionInterval = setInterval(async () => {
+        tvSdb.connect(26101, Config.tvIP);
+    }, 5000);
+});
 
 const sendData = (hexData) => tvSdb.write(Buffer.from(hexData, 'hex'))
 
@@ -79,7 +93,6 @@ wss.on('connection', ws => {
                 // The first check for the Tizen 3 is for checking the size(?) of the message. It's referred as "(char*)p->data" in C code. I'm not a C developer.
                 // The second check is for the size of the message. This took me a little too long to find out.
                 // The third check is for removing the third argument that debug was expecting on Tizen 3.0 devices. After removing it, it works on newer Tizen TVs.
-                sendData(`4f50454e2500000000000000${Config.isTizen3 ? '25' : '23' }000000${Config.isTizen3 ? '2f0c' : 'df0b' }0000b0afbab17368656c6c3a3020646562756720${appId}${Config.isTizen3 ? '2030' : ''}00`)
                 console.log("msg recieved");
 		sendData(`4f50454e2500000000000000${Config.isTizen3 ? '25' : '23' }000000${Config.isTizen3 ? '2f0c' : 'df0b' }0000b0afbab17368656c6c3a3020646562756720${appId}${Config.isTizen3 ? '2030' : ''}00`)
                 break;
