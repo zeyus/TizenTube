@@ -2,3 +2,8 @@ packets/
 node_modules/
 *.wgt
 dist/
+.metadata/
+.buildResult/
+.sign/
+bin/
+.project

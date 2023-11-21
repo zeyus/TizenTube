@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 <head>
+<style>
+	.textClass {
+	 -webkit-animation: color_change 1s infinite alternate;
+	 -moz-animation: color_change 1s infinite alternate;
+	 -ms-animation: color_change 1s infinite alternate;
+	 -o-animation: color_change 1s infinite alternate;
+	 animation: color_change 1s infinite alternate;
+     text-align: center;
+	}
+
+	@-webkit-keyframes color_change {
+	 from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@-moz-keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@-ms-keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@-o-keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+
+    .content {
+        margin: 50vh auto;
+    }
+    html, body {
+        background-color:rgb(28, 1, 22)
+    }
+</style>
 </head>
 <body>
-	<a style="color: white;" id="text">Why did this happen...?</a>
+	<div class="content">
+		<h1 class="textClass" id="text">Please wait while youtube loads...</h1>
+	</div>
 	<script>
 		window.location.href = "https://www.youtube.com/tv";
 		

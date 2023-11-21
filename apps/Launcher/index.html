@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	.textClass {
+	 -webkit-animation: color_change 1s infinite alternate;
+	 -moz-animation: color_change 1s infinite alternate;
+	 -ms-animation: color_change 1s infinite alternate;
+	 -o-animation: color_change 1s infinite alternate;
+	 animation: color_change 1s infinite alternate;
+     text-align: center;
+	}
+
+	@-webkit-keyframes color_change {
+	 from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@-moz-keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@-ms-keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@-o-keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+	@keyframes color_change {
+     from { color: rgb(146, 0, 136); }
+	 to { color: rgb(229, 0, 179); }
+	}
+
+    .content {
+        margin: 50vh auto;
+    }
+    html, body {
+        background-color:rgb(28, 1, 22)
+    }
+</style>
 </head>
 <body>
-    <a style="color: white;" id="text">Please wait while TizenTube launches.</a>
+	<div class="content">
+		<h1 class="textClass" id="text">Launching TizenTube...</h1>
+	</div>
     <script>
         // Change this with your own IP
-        var IP = '192.168.1.72';
+        var IP = '192.168.2.234';
         var wsServer;
         try {
         	wsServer = new WebSocket('ws://' + IP + ':3000');
@@ -27,7 +67,7 @@
         };
 
         setTimeout(function() {
-            document.getElementById('text').innerText = 'Timed out in 10 seconds.';
+            document.getElementById('text').innerText = 'Failed to launch TizenTube, please make sure the node server is running.';
         }, 10000);
     </script>
 </body>
